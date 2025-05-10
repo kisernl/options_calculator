@@ -1,0 +1,19 @@
+# Node.js frontend
+node_modules
+build
+package-lock.json
+yarn.lock
+
+# Django backend
+__pycache__/
+*.pyc
+*.sqlite3
+env/
+venv/
+.env
+*.log
+
+# OS and Editor specific files
+.DS_Store
+.vscode/
+.idea/
