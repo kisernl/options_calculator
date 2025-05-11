@@ -10,5 +10,5 @@ urlpatterns = [
     path('test/polygon/options/', views.test_polygon_options, name='test_polygon_options'),
     path('simple/test/', views.simple_test, name='simple_test'),
     path('quote/polygon/', views.get_last_quote_polygon, name='get_last_quote_polygon'),
-    path('quote/finnhub/', views.get_finnhub_quote, name='get_finnhub_quote'), # Add this line
+    path('quote/finnhub/', views.get_finnhub_quote, name='get_finnhub_quote'),
 ]
