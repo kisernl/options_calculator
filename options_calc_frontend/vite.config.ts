@@ -19,4 +19,5 @@ export default defineConfig({
       },
     },
   },
+  base: "/options_calculator",
 });
