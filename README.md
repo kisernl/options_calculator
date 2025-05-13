@@ -129,7 +129,3 @@ If you'd like to run a local copy of the Options Calculator for your own use, fo
 **6. Use the Application:**
 
 * Open your web browser and navigate to `http://localhost:3000`. You should now be able to use the Options Calculator.
-
-## Contributing
-
-If you'd like to contribute to this project, please feel free to submit pull requests.
