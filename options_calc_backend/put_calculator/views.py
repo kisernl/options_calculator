@@ -15,10 +15,16 @@ import finnhub
 def get_finnhub_quote(request):
     symbol = request.query_params.get('symbol', 'AAPL')  # Get 'symbol' from query params, default to AAPL
     finnhub_api_key = settings.FINNHUB_API_KEY
-    finnhub_client = finnhub.Client(api_key=finnhub_api_key)
 
-    quote_data = finnhub_client.quote(symbol)
-    return Response({"quote": quote_data})
+    if not finnhub_api_key:
+        return Response({"error": "FINNHUB_API_KEY is not set in settings."}, status=500)
+
+    try:
+        finnhub_client = finnhub.Client(api_key=finnhub_api_key)
+        quote_data = finnhub_client.quote(symbol)
+        return Response({"quote": quote_data})
+    except Exception as e:
+        return Response({"error": f"Error fetching quote from Finnhub: {str(e)}"}, status=500)
 
 
 @api_view(['GET'])

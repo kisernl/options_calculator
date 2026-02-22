@@ -22,11 +22,11 @@ This project is a full-stack web application built with a React frontend and a D
 
 * **Frontend:**
     * React
-    * JavaScript
-    * HTML
-    * CSS
+    * TypeScript
+    * Vite
+    * Tailwind CSS
 * **Backend:**
-    * Python
+    * Python (3.13 or lower)
     * Django
     * Django REST Framework
     * Finnhub API
@@ -37,7 +37,7 @@ If you'd like to run a local copy of the Options Calculator for your own use, fo
 
 **1. Fork the Repository:**
 
-* On the GitHub page for this repository (`github.com/yourusername/your-repository-name`), click the **"Fork"** button in the top right corner. This will create a copy of the repository under your own GitHub account.
+* On the GitHub page for this repository, click the **"Fork"** button in the top right corner. This will create a copy of the repository under your own GitHub account.
 
 **2. Clone Your Fork:**
 
@@ -46,26 +46,28 @@ If you'd like to run a local copy of the Options Calculator for your own use, fo
 * Run the following command, replacing `yourusername` with your GitHub username:
 
     ```bash
-    git clone [https://github.com/yourusername/your-repository-name.git](https://github.com/yourusername/your-repository-name.git)
+    git clone https://github.com/yourusername/options_calculator.git
     ```
 
 **3. Navigate to the Project Directory:**
 
     ```bash
-    cd your-repository-name
+    cd options_calculator
     ```
 
 **4. Set Up the Backend (Django):**
 
-* Navigate to the `backend` directory:
+* Navigate to the backend directory:
 
     ```bash
-    cd backend
+    cd options_calc_backend
     ```
-* **Create a Virtual Environment (Recommended):**
+* **Create a Virtual Environment:**
+
+    > **Note:** Python 3.14+ is not yet supported by some dependencies. Use Python 3.13 or lower.
 
     ```bash
-    python3 -m venv venv
+    python3.13 -m venv venv
     source venv/bin/activate  # On macOS/Linux
     # venv\Scripts\activate  # On Windows
     ```
@@ -74,17 +76,24 @@ If you'd like to run a local copy of the Options Calculator for your own use, fo
     ```bash
     pip install -r requirements.txt
     ```
-* **Set Up Finnhub API Key:**
-    * You'll need a free API key from Finnhub ([https://finnhub.io/](https://finnhub.io/)).
-    * Once you have your API key, you can either:
-        * Set it as an environment variable named `FINNHUB_API_KEY` on your system.
-        * Create a `.env` file in the `backend` directory and add:
+* **Set Up Environment Variables:**
 
-            ```
-            FINNHUB_API_KEY=YOUR_FINNHUB_API_KEY_HERE
-            ```
+    Create a `.env` file in the `options_calc_backend` directory with the following:
 
-            You might need to install the `python-dotenv` package (`pip install python-dotenv`) and load it in your Django settings if you choose this method.
+    ```
+    SECRET_KEY=your-django-secret-key-here
+    FINNHUB_API_KEY=your-finnhub-api-key-here
+    DEBUG=True
+    ```
+
+    * Generate a Django secret key by running:
+
+        ```bash
+        python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+        ```
+
+    * Get a free Finnhub API key from [https://finnhub.io/](https://finnhub.io/).
+
 * **Run Migrations:**
 
     ```bash
@@ -96,36 +105,29 @@ If you'd like to run a local copy of the Options Calculator for your own use, fo
     python manage.py runserver
     ```
 
-    The backend will usually be accessible at `http://localhost:8000`.
+    The backend will be accessible at `http://localhost:8000`.
 
 **5. Set Up the Frontend (React):**
 
 * Open a new terminal or command prompt.
-* Navigate to the `frontend` directory within your project:
+* Navigate to the frontend directory:
 
     ```bash
-    cd frontend
+    cd options_calc_frontend
     ```
 * **Install Dependencies:**
 
     ```bash
-    npm install  # or yarn install
+    npm install
     ```
-* **Configure Backend API URL:**
-    * In the `frontend` directory, create a `.env.development.local` file (if it doesn't exist).
-    * Add the following line, ensuring it points to your running Django development server:
-
-        ```
-        REACT_APP_BACKEND_URL=http://localhost:8000/api
-        ```
-* **Start the React Development Server:**
+* **Start the Vite Development Server:**
 
     ```bash
-    npm start  # or yarn start
+    npm run dev
     ```
 
-    The frontend will usually be accessible at `http://localhost:3000`.
+    The frontend will be accessible at `http://localhost:5173`. The Vite dev server is pre-configured to proxy API requests to the Django backend at `localhost:8000`.
 
 **6. Use the Application:**
 
-* Open your web browser and navigate to `http://localhost:3000`. You should now be able to use the Options Calculator.
+* Open your web browser and navigate to `http://localhost:5173`. You should now be able to use the Options Calculator.
